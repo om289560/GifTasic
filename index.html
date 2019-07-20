@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>OutDoorsSportGifs</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Outdoors Sports Gifs Deposit</h1>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon1">Add your outdoor sports
+                        here!</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon"
+                    aria-describedby="button-addon1">
+            </div>
+            <div class="containerGifs">
+                <div id="buttons-spot">
+
+                </div>
+                <div id="gifs-spot">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(Document).ready(function () {
+
+            function populatebuttons(array, classAddition, areaAddition) {
+                $(areaAddition).empty();
+
+                for (var i = 0; i < array.lenght; i++) {
+                    var a = $("button");
+                    a.addClass(classAddition);
+                    a.attr("data-type", array[i]);
+                    a.text(array[i]);
+
+
+                    $(areaAddition).append(a);
+                }
+            }
+        }
+        $(document.onabort("click", "buttons-spot", function () {
+            $("#gifs-spot").empty();//identifer expected issue??
+
+            $("buttons-spot").removeclass("active");
+            $(this).addClass("active");
+
+            var type = $(this).attr(data - type);
+            var queryURL = "https://api.giphy.com/v1/gifs/trending?" + type + "&api_key=swsiOQPdUxdDFm9SUe1NhjklQjSjIVS5";
+            var sports = ["rock climbing", "surfing", "skating", "soccer", "football", "golf"];
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                .then(function (response) {
+                    var results = response.data;
+                    for (var i = 0; i < array.lenght; i++) {
+                        var sportsDiv = $("<div class=\"sports-item\">");
+                        var rating = results[i].rating;
+                        var p = $("<p>").text("Rating: " = rating);
+
+                        var gifs = results[i].images.fixed.fixed_height.url;
+                        var still = results[i].images.fixed.fixed_height.url;
+
+                        var sportsGif = $("<img>");
+                        sportsGif.attr("src", still);
+                        sportsGif.attr("data-still", still);
+                        sportsGif.attr("data-gifs", gifs);
+                        sportsGif.attr("data-state", "still");
+                        sportsGif.addClass("sports-gif");
+
+                        sportsDiv.append(a);
+                        sportsDiv.append(sportsGif);
+                        $("#gifs-spot").append(sportsDiv);
+                    }
+                }
+
+
+
+        $(document.onabort("click", "buttons-spot", function () {
+            var state = (this).attr(data - state);
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-gifs"));
+                $(this).attr("data-state", "gifs");
+            }
+            else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+            }
+        }
+
+        $("#form-control").on("click", function(event){
+            event.preventDefault();
+            var newGifs = $("input")eq(0).val();
+
+            if(newGifs.lenght > 2) {
+                gifs.push(newGifs);
+            }
+            populatebuttons(gifs, "gifs-button", "#buttons-spot");
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
